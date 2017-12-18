@@ -22,10 +22,10 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image0]: ./test_images/straight_lines1.jpg "Undistorted"
+[image0]: ./test_images/straight_lines1.jpg "example"
 [image1]: ./output_images/before-after-calibration.png "Undistorted"
 [image2]: ./output_images/undist_transformed.png "Road Transformed"
-[image3]: ./output_images/threshold_combined_with_grad-Y.png"gradient_combined"
+[image3]: ./output_images/threshold_combined_with_grad-Y.png "gradient_combined"
 [image4]: ./output_images/threshold_combined_without_grad-Y.png "without_gradient-Y"
 [image5]: ./output_images/test_images_pipeline_Gradient_S.png "gradient+S"
 [image6]: ./output_images/test_images_pipeline_Gradient_R_L.png "gradient+L+R"
@@ -112,20 +112,20 @@ Here I started experimenting different combinations of color and gradient thresh
 **NOTE** the thresholds values are imperically chosen.
 
 *Experiments Summarization:
-   *1) Apply both Gradients + S-threshold
-   ![G+S][image5]
+   * 1) Apply both Gradients + S-threshold
+![G+S][image5]
    
    *2) Apply both Gradient + R-threshold + L-threshold
-   ![G+S+L][image6]
+![G+S+L][image6]
    
    *3) Apply only R-threshold + L-threshold
-   ![R+L][image8]
+![R+L][image8]
    
    *4) Apply  R-threshol + L-threshold + B-threshold
-   ![R+L+B][image7]
+![R+L+B][image7]
    
    *5) Apply L-threshold + B-threshold
-   ![L+B][image9]
+![L+B][image9]
 
  ***Best Combination*** It is noticed as shown above, the best combination is just apply L-threshold + B-threshold. Since, L-channel filters the effect of brightness or darkness in the image, while B-channel considered best grab the yellow color, since I had problem with yellow color detection as shown in the previous experiments. 
 
