@@ -138,7 +138,7 @@ Experiments Summarization:
  ***Best Combination*** It is noticed as shown above, the best combination is just apply **L-threshold + B-threshold**. Since, L-channel filters the effect of brightness or darkness in the image, while B-channel considered best grab the yellow color, since I had problem with yellow color detection as shown in the previous experiments. 
  ![L+B][image9]
 
-**NOTE** A good discution about color extraction can be found [here](https://communities.theiet.org/discussions/viewtopic/348/19442).
+**NOTE** A good discusion about color extraction can be found [here](https://communities.theiet.org/discussions/viewtopic/348/19442).
 
 The code for all my experiment step is contained from  the 11th to the  26th code cells of the IPython notebook located in "code.ipynb" (or in lines #393 through #799 of the file called `code.py`). 
 
