@@ -111,20 +111,20 @@ Then, I noticed that when removing Y-Gradent threshold, i get a better result as
 Here I started experimenting different combinations of color and gradient thresholds to generate a binary image.  I implemented the color thresholds in  (`s_thresh(), r_thresh(), l_thresh() and b_thresh()` ), to apply s_channel threshold , r_channel threshold, l_channel threshold and b_channel threshold
 **NOTE** the thresholds values are imperically chosen.
 
-*Experiments Summarization:
-   * 1) Apply both Gradients + S-threshold
+Experiments Summarization:
+1) Apply both Gradients + S-threshold
 ![G+S][image5]
    
-   *2) Apply both Gradient + R-threshold + L-threshold
+2) Apply both Gradient + R-threshold + L-threshold
 ![G+S+L][image6]
    
-   *3) Apply only R-threshold + L-threshold
+3) Apply only R-threshold + L-threshold
 ![R+L][image8]
    
-   *4) Apply  R-threshol + L-threshold + B-threshold
+4) Apply  R-threshol + L-threshold + B-threshold
 ![R+L+B][image7]
    
-   *5) Apply L-threshold + B-threshold
+5) Apply L-threshold + B-threshold
 ![L+B][image9]
 
  ***Best Combination*** It is noticed as shown above, the best combination is just apply L-threshold + B-threshold. Since, L-channel filters the effect of brightness or darkness in the image, while B-channel considered best grab the yellow color, since I had problem with yellow color detection as shown in the previous experiments. 
