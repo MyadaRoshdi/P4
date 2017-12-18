@@ -114,15 +114,19 @@ Here I started experimenting different combinations of color and gradient thresh
 Experiments Summarization:
 1) Apply both Gradients + S-threshold
 ![G+S][image5]
-   
+  
+  
 2) Apply both Gradient + R-threshold + L-threshold
 ![G+S+L][image6]
+   
    
 3) Apply only R-threshold + L-threshold
 ![R+L][image8]
    
+   
 4) Apply  R-threshol + L-threshold + B-threshold
 ![R+L+B][image7]
+   
    
 5) Apply L-threshold + B-threshold
 ![L+B][image9]
