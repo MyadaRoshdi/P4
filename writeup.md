@@ -76,7 +76,7 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 #### 1. Provide an example of a distortion-corrected image.
 
 To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
-![alt text][image0]
+![test_image][image0]
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
@@ -89,7 +89,7 @@ Here  I implemented the function (`corners_unwarp()`), i which I applied both di
 The code for this step is contained in the 6th code cells of the IPython notebook located in "code.ipynb" (or in lines #132 through #168 of the file called `code.py`). 
 Here's an example of my output for this step. 
 
-![alt text][image2]
+![undistorted_img][image2]
 
 
 **b) Apply combind thresholds to our un-distorted and warped image, and get a combined binary** 
@@ -101,10 +101,10 @@ Here  I implemented the functions (`abs_sobel_thresh(), mag_thresh(), dir_thresh
 The code for this step is contained in the 8th & 9th code cells of the IPython notebook located in "code.ipynb" (or in lines #209 through #289 of the file called `code.py`). 
 Here's an example of my output for this step. 
 
-![alt text][image3]
+![combined_Gradient][image3]
 
 Then, I noticed that when removing Y-Gradent threshold, i get a better result as shown below:
-![alt text][image4]
+![better_without_gradY][image4]
 
 **c) Experimenting different Gradient & Color thresholds to get the best combined binary** 
 
@@ -113,19 +113,19 @@ Here I started experimenting different combinations of color and gradient thresh
 
 *Experiments Summarization:
    *1) Apply both Gradients + S-threshold
-   ![alt text][image5]
+   ![G+S][image5]
    
    *2) Apply both Gradient + R-threshold + L-threshold
-   ![alt text][image6]
+   ![G+S+L][image6]
    
    *3) Apply only R-threshold + L-threshold
-   ![alt text][image8]
+   ![R+L][image8]
    
    *4) Apply  R-threshol + L-threshold + B-threshold
-   ![alt text][image7]
+   ![R+L+B][image7]
    
    *5) Apply L-threshold + B-threshold
-   ![alt text][image9]
+   ![L+B][image9]
 
  ***Best Combination*** It is noticed as shown above, the best combination is just apply L-threshold + B-threshold. Since, L-channel filters the effect of brightness or darkness in the image, while B-channel considered best grab the yellow color, since I had problem with yellow color detection as shown in the previous experiments. 
 
@@ -165,7 +165,7 @@ This resulted in the following source and destination points:
 
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
 
-![alt text][image2]
+![warped][image2]
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
