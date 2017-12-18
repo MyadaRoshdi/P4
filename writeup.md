@@ -135,7 +135,8 @@ Experiments Summarization:
 5) Apply L-threshold + B-threshold
 ![L+B][image9]
 
- ***Best Combination*** It is noticed as shown above, the best combination is just apply L-threshold + B-threshold. Since, L-channel filters the effect of brightness or darkness in the image, while B-channel considered best grab the yellow color, since I had problem with yellow color detection as shown in the previous experiments. 
+ ***Best Combination*** It is noticed as shown above, the best combination is just apply **L-threshold + B-threshold**. Since, L-channel filters the effect of brightness or darkness in the image, while B-channel considered best grab the yellow color, since I had problem with yellow color detection as shown in the previous experiments. 
+ ![L+B][image9]
 
 **NOTE** A good discution about color extraction can be found [here](https://communities.theiet.org/discussions/viewtopic/348/19442).
 
