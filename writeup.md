@@ -43,8 +43,6 @@ The goals / steps of this project are the following:
 [image18]: ./output_images/warped_cropped.png "cropped"
 [image19]: ./output_images/draw_measurments.png "final_test_result"
 [image20]: ./output_images/un_warped_binary.png "Unwarp"
-
-
 [video1]: ./output_videos/project_video.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
