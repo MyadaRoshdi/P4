@@ -3,7 +3,7 @@
 
 # # Advanced lane lines finding
 
-# **In this project, your goal is to write a software pipeline to identify the lane boundaries in a video from a front-facing camera on a car.** 
+# **In this project, the goal is to write a software pipeline to identify the lane boundaries in a video from a front-facing camera on a car.** 
 
 # ## Step1: Camera Calibration with OpenCV
 # 
@@ -167,7 +167,6 @@ def corners_unwarp(img, img_size, mtx, dist):
     # Return the resulting undistorted and warped image and matrix
     return warped, M, Minv
 
-print('end')
 
 
 # In[8]:
@@ -1014,7 +1013,7 @@ def visualize_lane_lines_fit(binary_warped, left_fit, right_fit, left_lane_inds,
     #plt.ylim(720, 0)
     return result, left_fitx, right_fitx, ploty
     
-print('end')    
+
     
 
 
@@ -1129,7 +1128,7 @@ def lane_curvature_vehicle_position(bin_img, ploty, leftx, rightx):
     car_position = abs(image_center - lane_center)
     return left_curverad, right_curverad, car_position
     
-print('end')    
+
     
 
 
@@ -1210,7 +1209,7 @@ def draw_lines(normal_img, binary_img,ploty, left_fitx, right_fitx,  Minv):
     
     return result
 
-print('end')
+
 
 
 # In[233]:
