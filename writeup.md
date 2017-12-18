@@ -209,6 +209,7 @@ Also , I exactly used the code suggested in the lesson, I just did some slight m
 
 **f) testing on all test_images**
 testing the full algorithm on all images supported in test_images are shown bellow:
+
 **Note:** the first image shows the algorithm with bad histogram and without cropping and the 2nd shows the final best results,
 
 ![Bad histogram and no cropping][image16]
