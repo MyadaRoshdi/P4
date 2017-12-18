@@ -116,13 +116,17 @@ Experiments Summarization:
 ![G+S][image5]
   
   
+  
 2) Apply both Gradient + R-threshold + L-threshold
 ![G+S+L][image6]
-   
+
+
    
 3) Apply only R-threshold + L-threshold
 ![R+L][image8]
-   
+
+
+
    
 4) Apply  R-threshol + L-threshold + B-threshold
 ![R+L+B][image7]
