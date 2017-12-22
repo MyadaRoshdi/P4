@@ -3,7 +3,7 @@
 
 # # Advanced lane lines finding
 
-# **In this project, the goal is to write a software pipeline to identify the lane boundaries in a video from a front-facing camera on a car.** 
+# **In this project, your goal is to write a software pipeline to identify the lane boundaries in a video from a front-facing camera on a car.** 
 
 # ## Step1: Camera Calibration with OpenCV
 # 
@@ -167,6 +167,7 @@ def corners_unwarp(img, img_size, mtx, dist):
     # Return the resulting undistorted and warped image and matrix
     return warped, M, Minv
 
+print('end')
 
 
 # In[8]:
@@ -1013,7 +1014,7 @@ def visualize_lane_lines_fit(binary_warped, left_fit, right_fit, left_lane_inds,
     #plt.ylim(720, 0)
     return result, left_fitx, right_fitx, ploty
     
-
+print('end')    
     
 
 
@@ -1102,18 +1103,35 @@ lane_lines_test_plt()
 # In[20]:
 
 
-def lane_curvature_vehicle_position(bin_img, ploty, leftx, rightx):
+def lane_curvature_vehicle_position(bin_img, left_fit, right_fit, left_lane_inds, right_lane_inds):
     '''
     this function is used to measure the curvature radius for left and right lanes, and car position w.r.t. center
     '''
     # Define conversions in x and y from pixels space to meters
-    ym_per_pix = 30/720 # meters per pixel in y dimension
-    xm_per_pix = 3.7/700 # meters per pixel in x dimension
+    ym_per_pix = 30/1000 # meters per pixel in y dimension, lane line is 10 ft = 3.048 meters
+    xm_per_pix = 3.7/400  # meters per pixel in x dimension
     
-    y_eval = np.max(ploty)
+    
+    h = bin_img.shape[0]
+    ploty = np.linspace(0, h-1, h)
+    y_eval = np.max(ploty)# the y-value where I will measure radius of curvature
+    
+    
+    
+    # Identify the x and y positions of all nonzero pixels in the image
+    nonzero = bin_img.nonzero()
+    nonzeroy = np.array(nonzero[0])
+    nonzerox = np.array(nonzero[1])
+    # Again, extract left and right line pixel positions
+    leftx = nonzerox[left_lane_inds]
+    lefty = nonzeroy[left_lane_inds] 
+    rightx = nonzerox[right_lane_inds]
+    righty = nonzeroy[right_lane_inds]
+    
+    
     # Fit new polynomials to x,y in world space
-    left_fit_cr = np.polyfit(ploty*ym_per_pix, leftx*xm_per_pix, 2)
-    right_fit_cr = np.polyfit(ploty*ym_per_pix, rightx*xm_per_pix, 2)
+    left_fit_cr = np.polyfit(lefty*ym_per_pix, leftx*xm_per_pix, 2)
+    right_fit_cr = np.polyfit(righty*ym_per_pix, rightx*xm_per_pix, 2)
     # Calculate the new radii of curvature
     left_curverad = ((1 + (2*left_fit_cr[0]*y_eval*ym_per_pix + left_fit_cr[1])**2)**1.5) / np.absolute(2*left_fit_cr[0])
     right_curverad = ((1 + (2*right_fit_cr[0]*y_eval*ym_per_pix + right_fit_cr[1])**2)**1.5) / np.absolute(2*right_fit_cr[0])
@@ -1122,13 +1140,18 @@ def lane_curvature_vehicle_position(bin_img, ploty, leftx, rightx):
     # Example values: 632.1 m    626.2 m
     
     # Geting the difference between center of the image and the center of the lane
-    image_center = bin_img.shape[0]/2 # center of the image in pixels
-    image_center = image_center * xm_per_pix
-    lane_center =  np.mean([left_fit_cr, right_fit_cr])
-    car_position = abs(image_center - lane_center)
-    return left_curverad, right_curverad, car_position
+    image_center = bin_img.shape[1]/2 # center of the image in pixels
+    #image_center = image_center * xm_per_pix
+    # evaluating the left and right polynomials at the bottom of the image( at y = 720)
+    left_fit_x_intersect = left_fit[0]*720**2 + left_fit[1]*720 + left_fit[2]
+    right_fit_x_intersect = right_fit[0]*720**2 + right_fit[1]*720 + right_fit[2]
     
 
+    lane_center =  np.mean([left_fit_x_intersect, right_fit_x_intersect]) # center of the lane in pixel
+    car_position = abs((image_center - lane_center))*xm_per_pix # covert from pixels to meters
+    return left_curverad, right_curverad, car_position
+    
+print('end')    
     
 
 
@@ -1142,7 +1165,7 @@ bin_img, Minv = pipeline(img, ksize=7, thresh1=(20, 100), mag_thresh1=(30, 100),
 left_fit, right_fit = lane_lines(bin_img)
 left_fit, right_fit, left_lane_inds, right_lane_inds, nonzerox, nonzeroy = lane_lines_fit(bin_img, left_fit, right_fit)
 result, left_fitx, right_fitx, ploty = visualize_lane_lines_fit(bin_img,left_fit, right_fit, left_lane_inds, right_lane_inds, nonzerox, nonzeroy)
-left_curverad, right_curverad, car_position = lane_curvature_vehicle_position(bin_img, ploty, left_fitx, right_fitx)
+left_curverad, right_curverad, car_position = lane_curvature_vehicle_position(bin_img, left_fit, right_fit, left_lane_inds, right_lane_inds)
 
 plt.imshow(result)
 print('left curvature radius= ',left_curverad, 'm','\nright curvature radius= ', right_curverad, 'm','\ncar position w.r.t.center= ',car_position,'m')
@@ -1209,7 +1232,7 @@ def draw_lines(normal_img, binary_img,ploty, left_fitx, right_fitx,  Minv):
     
     return result
 
-
+print('end')
 
 
 # In[233]:
@@ -1223,7 +1246,7 @@ bin_img, Minv = pipeline(img, ksize=7, thresh1=(20, 100), mag_thresh1=(30, 100),
 left_fit, right_fit = lane_lines(bin_img)
 left_fit, right_fit, left_lane_inds, right_lane_inds, nonzerox, nonzeroy = lane_lines_fit(bin_img, left_fit, right_fit)
 result, left_fitx, right_fitx, ploty = visualize_lane_lines_fit(bin_img,left_fit, right_fit, left_lane_inds, right_lane_inds, nonzerox, nonzeroy)
-left_curverad, right_curverad, car_position = lane_curvature_vehicle_position(bin_img, ploty, left_fitx, right_fitx)
+left_curverad, right_curverad, car_position = lane_curvature_vehicle_position(bin_img, left_fit, right_fit, left_lane_inds, right_lane_inds)
 result = draw_lines(img, bin_img,ploty, left_fitx, right_fitx,  Minv)
 
 curverad = (left_curverad + right_curverad)/2   
@@ -1255,7 +1278,7 @@ def final_pipeline(img):
     left_fit, right_fit = lane_lines(bin_img)
     left_fit, right_fit, left_lane_inds, right_lane_inds, nonzerox, nonzeroy = lane_lines_fit(bin_img, left_fit, right_fit)
     result, left_fitx, right_fitx, ploty = visualize_lane_lines_fit(bin_img,left_fit, right_fit, left_lane_inds, right_lane_inds, nonzerox, nonzeroy)
-    left_curverad, right_curverad, car_position = lane_curvature_vehicle_position(bin_img, ploty, left_fitx, right_fitx)
+    left_curverad, right_curverad, car_position = lane_curvature_vehicle_position(bin_img, left_fit, right_fit, left_lane_inds, right_lane_inds)
     result = draw_lines(img, bin_img,ploty, left_fitx, right_fitx,  Minv)
 
     curverad = (left_curverad + right_curverad)/2   
